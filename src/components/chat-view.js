@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Chatkit from '@pusher/chatkit'
 import Messages from './messages';
 import SendMessage from './send-message'
+import Users from './users';
 
 class ChatView extends Component {
   constructor(props) {
@@ -45,6 +46,9 @@ class ChatView extends Component {
                 messages: [...this.state.messages, message],
               })
             },
+            onUserCameOnline: () => this.forceUpdate(),
+            onUserWentOffline: () => this.forceUpdate(),
+            onUserJoined: () => this.forceUpdate(),
           },
         })
       })
@@ -84,11 +88,11 @@ class ChatView extends Component {
       <div style={styles.container}>
         <div style={styles.chatContainer}>
           <aside style={styles.whosOnlineListContainer}>
-            <h2>Online Users will appear here...</h2>
+            <Users currentUser={this.state.currentUser} users={this.state.currentRoom.users} />
           </aside>
           <section style={styles.chatListContainer}>
-             <Messages messages={this.state.messages} style={styles.chatList} />     
-             <SendMessage onSubmit={this.sendMessage} />
+            <Messages messages={this.state.messages} style={styles.chatList} />     
+            <SendMessage onSubmit={this.sendMessage} />
           </section>
         </div>
       </div>

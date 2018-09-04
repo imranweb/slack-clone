@@ -25,15 +25,16 @@ class App extends Component {
       })
       .catch(error => console.error('error', error))
   }
- render() {
-  if(this.state.currentUsername === '') {
-    return <UserForm onSubmit={this.onUsernameSubmitted} />
-  }
-  else {
-    return <ChatView currentUsername={this.state.currentUsername} />
-  }
-   
+
+  render() {
+    if(this.state.currentUsername === '') {
+      return <UserForm onSubmit={this.onUsernameSubmitted} />
+    }
+    else {
+      return <ChatView currentUsername={this.state.currentUsername} />
+    } 
  }
+ 
 }
 
 export default App
