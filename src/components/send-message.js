@@ -1,4 +1,29 @@
 import React, { Component } from 'react'
+import withStyles from '@material-ui/core/styles/withStyles';
+//import TextField from '@material-ui/core/TextField';
+//import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import ContentSend from '@material-ui/icons/Send';
+
+const styles = theme => ({
+  form: {
+    display: 'flex',
+    marginTop:'auto',
+    paddingLeft:'24px',
+  },
+  textField: {
+    color: 'inherit',
+    background: 'none',
+    outline: 'none',
+    border: 'none',
+    flex: 1,
+    fontSize: 16,
+    marginLeft: 0,
+  },
+  sendIcon: {
+    fontSize: '24px',
+  }
+});
 
 class SendMessage extends Component {
   constructor(props) {
@@ -24,28 +49,39 @@ class SendMessage extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     const styles = {
       container: {
-        padding: 20,
+        background: '#fff',
         borderTop: '1px #4C758F solid',
-        marginBottom: 20,
+        marginLeft: '-24px',
+        marginRight: '-24px',
+        paddingTop: '20px',
+        paddingBottom: '20px',
+        
+        // marginBottom: 20,
+        // position: 'fixed',
+        // bottom:30,
+        //display:'flex',
+       // marginTop:'auto',
+
       },
       form: {
-        display: 'flex',
+     
       },
       input: {
         color: 'inherit',
         background: 'none',
         outline: 'none',
+        width:'100%',
+        fontSize: 14,
         border: 'none',
-        flex: 1,
-        fontSize: 16,
       },
     }
     return (
       <div style={styles.container}>
-        <div>
-          <form onSubmit={this.onSubmit} style={styles.form}>
+         
+          <form className={classes.form} onSubmit={this.onSubmit} style={styles.form}>
             <input
               type="text"
               placeholder="Type a message here then hit ENTER"
@@ -53,11 +89,25 @@ class SendMessage extends Component {
               value={this.state.text}
               style={styles.input}
             />
+
+           <IconButton className={classes.sendIcon}  color="primary" aria-label="Send">
+            <ContentSend onClick={this.onSubmit}/>
+          </IconButton>
+          
+           {/* <TextField
+          id="message"
+          className={classes.textField}
+          placeholder="Type a message here then hit ENTER"
+          margin="normal"
+          onChange={this.onChange}
+          value={this.state.text}
+        /> */}
+         
           </form>
-        </div>
+        
       </div>
     )
   }
 }
 
-export default SendMessage
+export default  withStyles(styles)(SendMessage);

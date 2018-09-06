@@ -1,15 +1,18 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const Chatkit = require('pusher-chatkit-server')
+const Chatkit = require('pusher-chatkit-server');
+const config = require('./src/config');
 
+//console.log(config);
 const app = express()
 
-const chatkit = new Chatkit.default({
-  instanceLocator: 'v1:us1:701636f0-be86-4c26-ae6b-525ac671c4eb',
-  key: '20326e50-8ffd-4f71-b7f8-4d4986146e74:fl9bQJJdmjruNK3hJSl3Y8D1IFvxiKxc7iI1T3CEEJw=',
-})
+// const chatkit = new Chatkit.default({
+//   instanceLocator: 'v1:us1:701636f0-be86-4c26-ae6b-525ac671c4eb',
+//   key: '20326e50-8ffd-4f71-b7f8-4d4986146e74:fl9bQJJdmjruNK3hJSl3Y8D1IFvxiKxc7iI1T3CEEJw=',
+// })
 
+const chatkit = new Chatkit.default(config)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())

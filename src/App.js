@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import UserForm from './components/user-form';
+import React, { Component, Fragment } from 'react';
+import NavBar from './navbar';
+import SignForm from './components/sign-in';
 import ChatView from './components/chat-view';
 
 class App extends Component {
@@ -27,12 +28,21 @@ class App extends Component {
   }
 
   render() {
-    if(this.state.currentUsername === '') {
-      return <UserForm onSubmit={this.onUsernameSubmitted} />
-    }
-    else {
-      return <ChatView currentUsername={this.state.currentUsername} />
-    } 
+    const view = this.state.currentUsername === '' ? <SignForm onSubmit={this.onUsernameSubmitted} />
+    : <ChatView currentUsername={this.state.currentUsername} />;
+    return (
+      <Fragment>
+        <NavBar />
+        {view}
+      </Fragment>
+    )
+    // if(this.state.currentUsername === '') {
+    //   //return <UserForm onSubmit={this.onUsernameSubmitted} />
+    //   return <SignForm onSubmit={this.onUsernameSubmitted} />
+    // }
+    // else {
+    //   return <ChatView currentUsername={this.state.currentUsername} />
+    // } 
  }
  
 }
