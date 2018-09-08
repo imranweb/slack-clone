@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
-import AddRoom from './add-room';
+import AddRoom from '../components/add-room';
 import {createRoom} from '../actions';
 
 const styles = theme => ({
@@ -33,10 +33,10 @@ class Rooms extends React.PureComponent {
   }
   
   render() {
-    console.log("Room ender");
+   // console.log("Room ender");
     let items = '';
     let currentRoom = this.props.currentRoom;
-    if(this.props.rooms) {
+    if(this.props.rooms && currentRoom) {
       items = this.props.rooms.map((room, index) => {
         let name = "# "+room.name;
         let selected = (room.id === currentRoom.id);

@@ -5,10 +5,10 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 
 
-import Messages from './components/messages';
+import Messages from './containers/messages';
 import SendMessage from './components/send-message'
-import Rooms from './components/rooms';
-import Users from './components/users';
+import Rooms from './containers/rooms';
+import Users from './containers/users';
 //import TypingIndicator from './components/typing-indicator'
 
 

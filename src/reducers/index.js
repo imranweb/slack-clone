@@ -1,10 +1,13 @@
 const messageReducer = (currState = {currentUser: {}, currentRoom: null, messages: [], users: [], rooms: [], joinableRooms: [], }, action) => {
  // console.log("State from reducer",currState);
   switch(action.type) {
-    case 'SET_CURRENT_USER_AND_ROOM': 
-      const {currentUser, currentRoom} = action.payload;
+    case 'SET_CURRENT_USER': 
+     // const {currentUser, currentRoom} = action.payload;
       let newState = {...currState, ...action.payload};
-      return {...newState, rooms: currentUser.rooms, users: currentRoom.users};
+      return {...newState, currentUser: action.payload, rooms: action.payload.rooms};
+
+    case 'SET_CURRENT_ROOM': 
+      return {...currState, currentRoom: action.payload, users: action.payload.users, messages:[]}
 
     case 'RECEIVE_MESSAGE':
       return {...currState, messages: [...currState.messages, action.payload]};

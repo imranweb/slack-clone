@@ -16,6 +16,13 @@ export const connectChatkit = (userId) => {
   }
 }
 
+export const joinRoom = (currentUser, roomId) => {
+  return {
+    type: 'JOIN_ROOM',
+    payload: {currentUser, roomId}
+  }
+}
+
 export const receiveMessage = payload => {
   return {
     type: 'RECEIVE_MESSAGE', 
@@ -38,9 +45,6 @@ export const userCameOnLine = (payload) => {
   }
 }
 
-
-
-const onError = error => error;
  
 const getRandomColorByUsername = () => {
   const avatarColor = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue',  'teal', 'green',

@@ -2,8 +2,6 @@ import { put, call } from 'redux-saga/effects';
 import axios from 'axios';
 import Chatkit from '@pusher/chatkit'
 import config from './config';
-import { func } from 'prop-types';
-//import { func } from 'prop-types';
 
 
 const chatManager = userId =>
@@ -16,20 +14,18 @@ const chatManager = userId =>
 });
 
 const onConnect = (userId) => {
- // console.log("Connect", userId);
-  let result = {};
   return chatManager(userId)
   .connect()
   .then(currentUser => {
-    return new Promise((resolve, reject) => {
-      currentUser.joinRoom({ roomId: config.DEFAULT_ROOM_ID })
-      .then(currentRoom => {
-        resolve({currentUser, currentRoom})
-      })
-    });
-    //return currentUser
-  }).
-  then(currentRoom => {
+    // return new Promise((resolve, reject) => {
+    //   currentUser.joinRoom({ roomId: config.DEFAULT_ROOM_ID })
+    //   .then(currentRoom => {
+    //     resolve({currentUser, currentRoom})
+    //   })
+    // });
+    return currentUser
+  })
+  .then(currentRoom => {
     //console.log("Curent room", currentRoom);
     return currentRoom;
   })
@@ -39,8 +35,8 @@ const onConnect = (userId) => {
 }
 
 
-const onJoinChannel = (currentUser, roomId) => {
-  currentUser.joinRoom({ roomId})
+const onJoinRoom = ({currentUser, roomId}) => {
+  return currentUser.joinRoom({ roomId})
   .then(currentRoom => {
     return currentRoom;
   })
@@ -79,7 +75,7 @@ const onError = (error) =>{
 export function* connect({payload}) {
   try {
     const currentUser = yield call(onConnect, payload);
-    yield put({ type: 'SET_CURRENT_USER_AND_ROOM', payload:currentUser});
+    yield put({ type: 'SET_CURRENT_USER', payload:currentUser});
   } catch(error) {
     onError(error);
   }
@@ -88,7 +84,7 @@ export function* connect({payload}) {
 
 export function* joinRoom({payload}) {
   try {
-    const currentRoom = yield call(onConnect, payload);
+    const currentRoom = yield call(onJoinRoom, payload);
     yield put({ type: 'SET_CURRENT_ROOM', payload:currentRoom});
   } catch(error) {
     onError(error);

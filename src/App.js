@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router,Route,}  from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import NavBar from './navbar';
-import SignForm from './components/sign-in';
-import ChatView from './components/chat-view';
+import SignForm from './containers/sign-in';
+import ChatView from './containers/chat-view';
 
 const theme = createMuiTheme({
   palette: {
