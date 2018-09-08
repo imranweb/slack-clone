@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
@@ -51,4 +53,15 @@ class Users extends Component {
 
 
 
-export default Users
+const mapStateToProps = (state, ownProps) => {
+  return {
+    users: state.users,
+  };
+}
+
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return bindActionCreators({connectChatkit}, dispatch);
+// }
+
+export default connect(mapStateToProps, null)(Users);
+//export default Users

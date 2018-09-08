@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -10,6 +12,9 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+
+
+import {createUser} from '../actions';
 
 const styles = theme => ({
   layout: {
@@ -48,17 +53,27 @@ class SignInForm extends Component {
     super(props)
     this.state = {
       username: '',
+      name: ''
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onNameChange = this.onNameChange.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault()
-    this.props.onSubmit(this.state.username)
+    this.props.createUser({id:this.state.username, name: this.state.name});
+    // window.sessionStorage.setItem('current_user', this.state.username);
+    // window.location.href = './messages';
+    //this.props.onSubmit({username:this.state.username, name: this.state.name});
   }
+
   onChange(e) {
     this.setState({ username: e.target.value })
+  }
+
+  onNameChange(e) {
+    this.setState({ name: e.target.value })
   }
 
   render() {
@@ -78,12 +93,12 @@ class SignInForm extends Component {
               <Input id="username" name="username" autoComplete="username" autoFocus onChange={this.onChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
+              <InputLabel htmlFor="name">Display name</InputLabel>
               <Input
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                name="name"
+                type="text"
+                id="name"
+                onChange={this.onNameChange}
               />
             </FormControl>
             <Button
@@ -107,4 +122,16 @@ SignInForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignInForm);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    currentUser: state.currentUser
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return bindActionCreators({createUser}, dispatch);
+}
+//export default Board;
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignInForm));
+
+//export default withStyles(styles)(SignInForm);createUser

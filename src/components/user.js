@@ -26,6 +26,7 @@ class User extends Component {
     //     marginRight: 10,
     //   },
     // }
+
     return (
       <ListItem button>
         <ListItemText primary={this.props.user.name} className={this.props.user.presence.state} style={styles.ListItemText} />

@@ -1,19 +1,14 @@
-// const Rooms = (props) => {
-//   console.log(props);
-//   const rooms = props.rooms.map(room => {
-//     return room.name;
-//   })
-//   return rooms;
-// }
-
-
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom'
 import AddRoom from './add-room';
+import {createRoom} from '../actions';
 
 const styles = theme => ({
   button: {
@@ -28,9 +23,9 @@ class Rooms extends React.PureComponent {
     this.props.currentUser.createRoom({
       name: name,
       //private: true,
-      addUserIds: [this.props.currentUser.id]
+     // addUserIds: [this.props.currentUser.id]
     }).then(room => {
-      console.log(`Created room called ${room.name}`);
+      this.props.createRoom(room);
     })
     .catch(err => {
       console.log(`Error creating room ${err}`)
@@ -38,19 +33,22 @@ class Rooms extends React.PureComponent {
   }
   
   render() {
-   
+    console.log("Room ender");
     let items = '';
+    let currentRoom = this.props.currentRoom;
     if(this.props.rooms) {
       items = this.props.rooms.map((room, index) => {
         let name = "# "+room.name;
-        let selected = (room.id === 15497973);
+        let selected = (room.id === currentRoom.id);
+        let link = `/messages/${room.id}`;
         return (
-          <ListItem key={index} button selected={selected}>
+          <ListItem key={index} button selected={selected} component={Link} to={link}>
             {/* <ListItemIcon>
               <InboxIcon />
             </ListItemIcon> */}
            
             <ListItemText primary={name} />
+            
           </ListItem>
         )
       });
@@ -60,11 +58,23 @@ class Rooms extends React.PureComponent {
           subheader={<ListSubheader component="div">Rooms
           <AddRoom onRoomCreation={this.onRoomCreation.bind(this)} />
            
-           </ListSubheader>}>
-        {items}
+          </ListSubheader>}>
+        <div>{items}</div>
       </List>
     )
   }
 }
 
-export default withStyles(styles)(Rooms);;
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    rooms: state.rooms,
+    currentRoom: state.currentRoom
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return bindActionCreators({createRoom}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Rooms));

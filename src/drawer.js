@@ -80,13 +80,13 @@ const ClippedDrawer = (props) => {
         }}
       >
        
-        <Rooms rooms={props.rooms} currentUser={props.currentUser} />
+        <Rooms currentUser={props.currentUser} />
         <Divider />
-        <Users currentUser={props.currentUser} users={props.users} />
+        <Users />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.wrapper}>
-          <Messages messages={props.messages} style={styles.chatList} />   
+          <Messages />   
           {/* <TypingIndicator usersTyping={props.usersTyping} />   */}
           <SendMessage onSubmit={props.onSubmit} onChange={props.onChange} />
         </div>

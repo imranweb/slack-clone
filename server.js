@@ -12,16 +12,40 @@ const app = express()
 //   key: '20326e50-8ffd-4f71-b7f8-4d4986146e74:fl9bQJJdmjruNK3hJSl3Y8D1IFvxiKxc7iI1T3CEEJw=',
 // })
 
-const chatkit = new Chatkit.default(config)
+const chatkit = new Chatkit.default(config.app)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 
+
+app.post("/create/user", (req, res) => {
+  chatkit.createUser(req.body)
+  .then(() => res.sendStatus(201))
+  .catch(error => {
+    if (error.error_type === 'services/chatkit/user_already_exists') {
+      res.sendStatus(200)
+    } else {
+      res.status(error.status).json(error)
+    }
+  });
+  // chatkit
+  //   .createUser({
+  //     id: req.body.id,
+  //     name: req.body.name
+  //   })
+  //   .then(() => {
+  //     res.send("User created successfully");
+  //   })
+  //   .catch(err => {
+  //     res.status(500).send(err);
+  //   });
+});
+
 app.post('/users', (req, res) => {
-  const { username } = req.body
+  const { username, name } = req.body;
   chatkit.createUser({ 
     id: username, 
-    name: username 
+    name: name
   })
   .then(() => res.sendStatus(201))
   .catch(error => {

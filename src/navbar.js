@@ -6,9 +6,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Button from '@material-ui/core/Button';
 
 const styles = {
   root: {
+    flexGrow: 1,
+  },
+  flex: {
     flexGrow: 1,
   },
   menuButton: {
@@ -19,7 +23,7 @@ const styles = {
 
 function DenseAppBar(props) {
   const { classes } = props;
-
+  const logout = (props.currentUsername) ? <Button color="inherit" onClick={props.onLogout}>Logout</Button> : '';
   //console.log(classes);
   return (
     <div className={classes.root}>
@@ -28,12 +32,10 @@ function DenseAppBar(props) {
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-
-
-
-          <Typography variant="title" color="inherit">
+          <Typography variant="title" color="inherit" className={classes.flex}>
             Chat App
           </Typography>
+          {logout}
         </Toolbar>
       </AppBar>
     </div>

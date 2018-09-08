@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
 //import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -7,7 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-function LinearQuery(props) {
+
+
+const LinearQuery = (props) => {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -18,18 +21,6 @@ function LinearQuery(props) {
   );
 }
 
-
-let userAvatars = [];
-const avatarColor = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue',  'teal', 'green',
- 'light-green', 'lime', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey' ];
-
- 
-const getRandomColorByUsername = (username) =>{
-  if(userAvatars[username]=== undefined) {
-    userAvatars[username] = avatarColor[Math.floor(Math.random()*avatarColor.length)];
-  }
-  return userAvatars[username];
-}
 
 const styles = theme => ({
   root: {
@@ -51,18 +42,9 @@ const styles = theme => ({
 
 
 class Messages extends Component {
-  render() {
-   // console.log(userAvatars);
-    // const styles = {
-    //   container: {
-    //     overflowY: 'scroll',
-    //     flex: 1,
-    //     height: '650px',
-    //   },
-    // }
-   
-    const { classes } = this.props;
 
+  render() {
+    const { classes } = this.props;
     if(this.props.messages.length === 0) {
       return (
         <LinearQuery classes={classes} />
@@ -74,15 +56,15 @@ class Messages extends Component {
           {this.props.messages.map((message, index) => {
              let inLineStyles = {
               avatar: {
-                backgroundColor: getRandomColorByUsername(message.senderId),
+                backgroundColor: message.sender.customData.avatar_color
               }
             }
             return (
               <ListItem key={index} dense button className={classes.listItem}>
                 <Avatar className={classes.avatar} style={inLineStyles.avatar}>
-                  {message.senderId.charAt(0).toUpperCase()}
+                  {message.sender.name.charAt(0).toUpperCase()}
                 </Avatar>
-                <ListItemText primary={message.senderId} secondary={message.text} />
+                <ListItemText primary={message.sender.name} secondary={message.text} />
               </ListItem>
             )
           }
@@ -90,10 +72,18 @@ class Messages extends Component {
         </List>
       </div>
     );
-
-    
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    messages: state.messages,
+  };
+}
 
-export default withStyles(styles)(Messages);
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return bindActionCreators({connectChatkit}, dispatch);
+// }
+
+export default connect(mapStateToProps, null)(withStyles(styles)(Messages));
+//export default withStyles(styles)(Messages);
