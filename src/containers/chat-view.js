@@ -25,7 +25,7 @@ class ChatView extends Component {
   }
 
   sendTypingEvent() {
-    console.log("RoomId=", this.props.currentRoom.id)
+  
     if(this.props.currentRoom.id) {
        this.props.currentUser
        .isTypingIn({roomId: this.props.currentRoom.id})
@@ -55,7 +55,6 @@ class ChatView extends Component {
               this.props.receiveMessage(message);
             },
             onUserStartedTyping: user => {
-             // console.log("typing=", user)
               this.setState({
                 usersTyping: [...this.state.usersTyping, user.name],
               })
