@@ -18,28 +18,28 @@ app.use(bodyParser.json())
 app.use(cors())
 
 
-app.post("/create/user", (req, res) => {
-  chatkit.createUser(req.body)
-  .then(() => res.sendStatus(201))
-  .catch(error => {
-    if (error.error_type === 'services/chatkit/user_already_exists') {
-      res.sendStatus(200)
-    } else {
-      res.status(error.status).json(error)
-    }
-  });
-  // chatkit
-  //   .createUser({
-  //     id: req.body.id,
-  //     name: req.body.name
-  //   })
-  //   .then(() => {
-  //     res.send("User created successfully");
-  //   })
-  //   .catch(err => {
-  //     res.status(500).send(err);
-  //   });
-});
+// app.post("/create/user", (req, res) => {
+//   chatkit.createUser(req.body)
+//   .then(() => res.sendStatus(201))
+//   .catch(error => {
+//     if (error.error_type === 'services/chatkit/user_already_exists') {
+//       res.sendStatus(200)
+//     } else {
+//       res.status(error.status).json(error)
+//     }
+//   });
+//   // chatkit
+//   //   .createUser({
+//   //     id: req.body.id,
+//   //     name: req.body.name
+//   //   })
+//   //   .then(() => {
+//   //     res.send("User created successfully");
+//   //   })
+//   //   .catch(err => {
+//   //     res.status(500).send(err);
+//   //   });
+// });
 
 app.post('/users', (req, res) => {
   const { username, name } = req.body;
