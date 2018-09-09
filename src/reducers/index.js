@@ -3,9 +3,13 @@ const messageReducer = (currState = {currentUser: null, currentRoomId: null, cur
   switch(action.type) {
     case 'SET_CURRENT_USER': 
      // const {currentUser, currentRoom} = action.payload;
-      let newState = {...currState, ...action.payload};
+      //let newState = {...currState, ...action.payload};
       //console.log("Set State=", action.payload.rooms);
-      return {...currState, currentUser: action.payload, rooms: action.payload.rooms};
+      const data = action.payload;
+      return {...currState, currentUser: data.currentUser, currentRoom: data.currentRoom, 
+        currentRoomId: data.currentRoom.id, rooms: data.currentUser.rooms,
+        users: data.currentRoom.users
+      };
 
     case 'SET_CURRENT_ROOM_ID':
       return {...currState, currentRoomId: action.payload};

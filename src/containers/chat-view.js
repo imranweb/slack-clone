@@ -25,12 +25,12 @@ class ChatView extends Component {
   }
 
   sendTypingEvent() {
-    //console.log("RoomId=", this.state.currentRoom.id)
-    // if(this.state.currentRoom.id) {
-    //   // this.state.currentUser
-    //   // .isTypingIn(this.state.currentRoom.id)
-    //   // .catch(error => console.error('error', error))
-    // }
+    console.log("RoomId=", this.props.currentRoom.id)
+    if(this.props.currentRoom.id) {
+       this.props.currentUser
+       .isTypingIn({roomId: this.props.currentRoom.id})
+       .catch(error => console.error('error', error))
+    }
   }
 
   subscribe(props) {
@@ -54,12 +54,14 @@ class ChatView extends Component {
               // })
               this.props.receiveMessage(message);
             },
-            userStartedTyping: user => {
+            onUserStartedTyping: user => {
+             // console.log("typing=", user)
               this.setState({
                 usersTyping: [...this.state.usersTyping, user.name],
               })
             },
             userStoppedTyping: user => {
+            
               this.setState({
                 usersTyping: this.state.usersTyping.filter(
                   username => username !== user.name
@@ -81,19 +83,18 @@ class ChatView extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if(this.props.currentUser && this.props.disconnect) {
-      this.props.currentUser.disconnect();
+    if(props.currentUser && this.props.disconnect) {
+      props.currentUser.disconnect();
     }
       //return <Redirect to='/' />
     else {
       this.subscribe(props);
-
-      if(this.props.currentUser && (!this.props.currentRoom)) {
-        this.props.getJoinableRooms(this.props.currentUser);
+      //if(this.props.currentUser && (!this.props.currentRoom)) {
+      if(props.currentUser) {
+        this.props.getJoinableRooms(props.currentUser);
       }
     }
-   
-    //console.log('will recieve props', props.match);
+
   } 
 
   componentDidMount () {

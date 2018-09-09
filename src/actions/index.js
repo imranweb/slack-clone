@@ -1,4 +1,8 @@
-
+const getRandomColorByUsername = () => {
+  const avatarColor = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue',  'teal', 'green',
+  'light-green', 'lime', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey' ];
+  return  avatarColor[Math.floor(Math.random()*avatarColor.length)];
+}
 
 export const createUser = ({name, id}) =>{
   let payload = {name, id, customData: {"avatar_color": getRandomColorByUsername()}};
@@ -58,12 +62,5 @@ export const userCameOnLine = (payload) => {
     type: 'USER_CAME_ONLINE', 
     payload,
   }
-}
-
- 
-const getRandomColorByUsername = () => {
-  const avatarColor = [ 'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue',  'teal', 'green',
-  'light-green', 'lime', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey' ];
-  return  avatarColor[Math.floor(Math.random()*avatarColor.length)];
 }
 

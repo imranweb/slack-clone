@@ -13,18 +13,27 @@ const chatManager = userId =>
     }),
 });
 
+const onSuccess = (userId) => {
+  window.sessionStorage.setItem('current_user', userId);
+  window.location.href = './messages';
+}
+
+const onError = (error) =>{
+  console.log(error);
+}
+
+
 const onConnect = (userId) => {
   return chatManager(userId)
   .connect()
   .then(currentUser => {
-    // return new Promise((resolve, reject) => {
-    //   currentUser.joinRoom({ roomId: config.DEFAULT_ROOM_ID })
-    //   .then(currentRoom => {
-    //     resolve({currentUser, currentRoom})
-    //   })
-    // });
-    console.log("Rooms" , currentUser.rooms);
-    return currentUser
+    return new Promise((resolve, reject) => {
+      currentUser.joinRoom({ roomId: config.DEFAULT_ROOM_ID })
+      .then(currentRoom => {
+        resolve({currentUser, currentRoom});
+      })
+    });
+    //return currentUser
   })
   .then(currentRoom => {
     //console.log("Curent room", currentRoom);
@@ -69,14 +78,6 @@ const onCreateUser = (payload) => {
     });
 };
 
-const onSuccess = (userId) => {
-  window.sessionStorage.setItem('current_user', userId);
-  window.location.href = './messages';
-}
-
-const onError = (error) =>{
-  console.log(error);
-}
 
 
 

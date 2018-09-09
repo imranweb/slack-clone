@@ -1,14 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
-import AddRoom from '../components/add-room';
-import {createRoom} from '../actions';
 
 const styles = theme => ({
   button: {
@@ -20,10 +16,7 @@ const styles = theme => ({
 class Rooms extends React.PureComponent {  
 
   render() {
-   // console.log("Room ender");
     let items = '';
-    //let currentRoom = this.props.currentRoom;
-    let heading = this.props.joinable ? 'Joinable Rooms' : 'Rooms';
     let AddRooms = this.props.addRoom ? this.props.addRoom : '';
     if(this.props.rooms) {
       items = this.props.rooms.map((room, index) => {

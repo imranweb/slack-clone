@@ -12,9 +12,6 @@ import JoinableRooms from './containers/joinable-rooms';
 import Users from './containers/users';
 //import TypingIndicator from './components/typing-indicator'
 
-
-//import { mailFolderListItems, otherMailFolderListItems } from './tileData';
-
 const drawerWidth = 320;
 
 const styles = theme => ({
@@ -62,7 +59,7 @@ const ClippedDrawer = (props) => {
       <main className={classes.content}>
         <div className={classes.wrapper}>
           <Messages />   
-          {/* <TypingIndicator usersTyping={props.usersTyping} />   */}
+          {/* <TypingIndicator usersTyping={props.usersTyping} />    */}
           <SendMessage onSubmit={props.onSubmit} onChange={props.onChange} />
         </div>
         

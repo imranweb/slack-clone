@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+//import {bindActionCreators} from 'redux';
 import Rooms from '../components/rooms';
 
 class JoinableRooms extends React.PureComponent {  

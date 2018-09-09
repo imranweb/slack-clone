@@ -5,13 +5,6 @@ import AddRoom from '../components/add-room';
 import Rooms from '../components/rooms';
 import {createRoom} from '../actions';
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    float:'right',
-  },
-});
-
 class UserRooms extends React.PureComponent {  
 
   onRoomCreation(name) {

@@ -69,7 +69,8 @@ class SignInForm extends Component {
   }
 
   onChange(e) {
-    this.setState({ username: e.target.value })
+    this.setState({ username: e.target.value });
+    this.props.onChange();
   }
 
   onNameChange(e) {
@@ -90,7 +91,7 @@ class SignInForm extends Component {
           <form className={classes.form} onSubmit={this.onSubmit}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="username">Username</InputLabel>
-              <Input id="username" name="username" autoComplete="username" autoFocus onChange={this.onChange} />
+              <Input id="username" name="username" autoComplete="username" autoFocus required onChange={this.onChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="name">Display name</InputLabel>
@@ -98,6 +99,7 @@ class SignInForm extends Component {
                 name="name"
                 type="text"
                 id="name"
+                required
                 onChange={this.onNameChange}
               />
             </FormControl>

@@ -7,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 
 const styles = {
@@ -24,6 +26,7 @@ export default class AddRoom extends React.Component {
   state = {
     open: false,
     inputValue : '',
+    isPrivate: false,
   };
 
   handleClickOpen = () => {
@@ -31,7 +34,7 @@ export default class AddRoom extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false, inputValue: '' });
+    this.setState({ open: false, inputValue: '', isPrivate:false});
   };
 
   onSubmit(event) {
@@ -48,6 +51,10 @@ export default class AddRoom extends React.Component {
     this.setState({inputValue: event.target.value});
   }
 
+  handleSwitchChange(event){
+    this.setState({isPrivate: event.target.checked});
+  }
+
   render() {
     return (
       <Fragment>
@@ -58,7 +65,7 @@ export default class AddRoom extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          maxWidth = 'sm'
+          maxWidth='sm'
           fullWidth
         >
           <form onSubmit={this.onSubmit.bind(this)}>
@@ -75,8 +82,20 @@ export default class AddRoom extends React.Component {
               required
               type="text"
               fullWidth
-              onChange = {this.onChange.bind(this)}
+              onChange={this.onChange.bind(this)}
               value={this.state.inputValue}
+            />
+
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.state.isPrivate}
+                  onChange={this.handleSwitchChange.bind(this)}
+                  value="checkedB"
+                  color="primary"
+                />
+              }
+              label="Is Private?"
             />
           </DialogContent>
           <DialogActions>
