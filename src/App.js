@@ -16,6 +16,7 @@ class App extends Component {
     super()
     this.state = {
       currentUsername: '',
+      disconnect: false,
     }
     this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
   }
@@ -40,7 +41,8 @@ class App extends Component {
     this.setState({
       currentUsername: ''
     });
-    window.location.href = '/';
+   // window.location.href = '/';
+    this.setState({disconnect: true});
   }
 
   render() {
@@ -60,8 +62,8 @@ class App extends Component {
         <MuiThemeProvider theme={theme}>
           <Route path="/" component={() => <NavBar currentUsername={currentUsername} onLogout={this.logout.bind(this)} />} />
           <Route exact path="/" component={() => <SignForm onSubmit={this.onUsernameSubmitted} />}/>
-          <Route exact path="/messages/:roomId"  render={(props) => <ChatView match={props.match} currentUserId={currentUsername} /> } />
-          <Route exact path="/messages" component={() => <ChatView currentUserId={currentUsername} /> } />
+          <Route exact path="/messages/:roomId"  render={(props) => <ChatView match={props.match} currentUserId={currentUsername} disconnect={this.state.disconnect} /> } />
+          <Route exact path="/messages" component={() => <ChatView currentUserId={currentUsername}  disconnect={this.state.disconnect} /> } />
         </MuiThemeProvider>
         
       </Router>

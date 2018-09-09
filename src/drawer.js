@@ -7,7 +7,8 @@ import Divider from '@material-ui/core/Divider';
 
 import Messages from './containers/messages';
 import SendMessage from './components/send-message'
-import Rooms from './containers/rooms';
+import UserRooms from './containers/user-rooms';
+import JoinableRooms from './containers/joinable-rooms';
 import Users from './containers/users';
 //import TypingIndicator from './components/typing-indicator'
 
@@ -17,32 +18,6 @@ import Users from './containers/users';
 const drawerWidth = 320;
 
 const styles = theme => ({
-  // root: {
-  //   flexGrow: 1,
-  //  // height: '100vh',
-  //   zIndex: 1,
-  // //  overflow: 'hidden',
-  //   position: 'relative',
-  //   display: 'flex',
-  // },
-  // appBar: {
-  //   zIndex: theme.zIndex.drawer + 1,
-  // },
-  // drawerPaper: {
-  //   position: 'relative',
-  //   width: drawerWidth,
-  // },
-  // content: {
-  //   flexGrow: 1,
-  //   backgroundColor: theme.palette.background.default,
-  //   padding: theme.spacing.unit * 3,
-  //   minWidth: 0, // So the Typography noWrap works
-  // },
-  // wrapper: {
-  //   marginTop:'auto',
-   
-  // },
-  // toolbar: theme.mixins.toolbar,
   root: {
     flexGrow: 1,
     height: '100vh',
@@ -80,7 +55,7 @@ const ClippedDrawer = (props) => {
         }}
       >
        
-        <Rooms currentUser={props.currentUser} />
+        <UserRooms  />
         <Divider />
         <Users />
       </Drawer>
@@ -92,6 +67,15 @@ const ClippedDrawer = (props) => {
         </div>
         
       </main>
+
+       <Drawer
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        >
+        <JoinableRooms />
+      </Drawer>
     </div>
   );
 }

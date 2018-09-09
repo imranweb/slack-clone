@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import {takeLatest} from 'redux-saga/effects'; 
 import Reducers from './reducers';
-import {createUser, connect, joinRoom} from './saga';
+import {createUser, connect, joinRoom, getJoinableRooms} from './saga';
 import App from './App'
 import './index.css'
 
@@ -13,6 +13,7 @@ function* watchRequest() {
   yield takeLatest('CONNECT', connect);
   yield takeLatest('JOIN_ROOM', joinRoom);
   yield takeLatest('CREATE_USER', createUser);
+  yield takeLatest('GET_JOINABLE_ROOMS', getJoinableRooms);
 }
 
 const sagaMiddleware = createSagaMiddleware();

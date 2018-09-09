@@ -19,7 +19,22 @@ export const connectChatkit = (userId) => {
 export const joinRoom = (currentUser, roomId) => {
   return {
     type: 'JOIN_ROOM',
-    payload: {currentUser, roomId}
+    payload: {currentUser, roomId},
+  }
+}
+
+export const setCurrentRoomId = (roomId) => {
+  return {
+    type: 'SET_CURRENT_ROOM_ID',
+    payload: roomId,
+  }
+}
+
+
+export const getJoinableRooms = (currentUser) => {
+  return {
+    type: 'GET_JOINABLE_ROOMS',
+    payload: currentUser
   }
 }
 
