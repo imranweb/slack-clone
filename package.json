@@ -26,10 +26,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "proxy": {
-    "/create/user": {
-      "target": "http://localhost:3001"
-    }
   }
 }
