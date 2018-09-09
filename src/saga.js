@@ -45,7 +45,7 @@ const onJoinRoom = ({currentUser, roomId}) => {
 
 const onCreateUser = (payload) => {
   axios
-    .post(`${config.base_url}create/user`, payload)
+    .post(`/create/user`, payload)
     .then(response => {
       onSuccess(payload.id);
     })
