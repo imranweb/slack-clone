@@ -31,7 +31,7 @@
   "scripts": {
     "start": "concurrently \"node ./server.js\" \"react-scripts start\"",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "mocha src/**/*.test.js",
     "eject": "react-scripts eject"
   }
 }
