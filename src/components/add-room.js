@@ -23,17 +23,21 @@ const styles = {
 }
 
 export default class AddRoom extends React.Component {
-  state = {
-    open: false,
-    inputValue : '',
-    isPrivate: false,
-  };
-
-  handleClickOpen = () => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      inputValue : '',
+      isPrivate: false,
+    };
+  
+  }
+  
+  handleClickOpen() {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
+  handleClose () {
     this.setState({ open: false, inputValue: '', isPrivate:false});
   };
 
@@ -58,12 +62,12 @@ export default class AddRoom extends React.Component {
   render() {
     return (
       <Fragment>
-        <Button mini  align="right" variant="fab" color="primary" aria-label="Add" style={styles.button} onClick={this.handleClickOpen}>
+        <Button mini  align="right" variant="fab" color="primary" aria-label="Add" style={styles.button} onClick={this.handleClickOpen.bind(this)}>
             <AddIcon />
         </Button>
         <Dialog
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={this.handleClose.bind(this)}
           aria-labelledby="form-dialog-title"
           maxWidth='sm'
           fullWidth
@@ -99,7 +103,7 @@ export default class AddRoom extends React.Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose.bind(this)} color="primary">
               Cancel
             </Button>
             <Button color="primary" type="submit">

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
-//import TextField from '@material-ui/core/TextField';
-//import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import ContentSend from '@material-ui/icons/Send';
 
@@ -58,13 +56,6 @@ class SendMessage extends Component {
         marginRight: '-24px',
         paddingTop: '20px',
         paddingBottom: '20px',
-        
-        // marginBottom: 20,
-        // position: 'fixed',
-        // bottom:30,
-        //display:'flex',
-       // marginTop:'auto',
-
       },
       form: {
      
@@ -80,7 +71,6 @@ class SendMessage extends Component {
     }
     return (
       <div style={styles.container}>
-         
           <form className={classes.form} onSubmit={this.onSubmit} style={styles.form}>
             <input
               type="text"
@@ -89,11 +79,9 @@ class SendMessage extends Component {
               value={this.state.text}
               style={styles.input}
             />
-
            <IconButton className={classes.sendIcon}  color="primary" aria-label="Send">
             <ContentSend onClick={this.onSubmit}/>
           </IconButton>
-          
            {/* <TextField
           id="message"
           className={classes.textField}
@@ -102,9 +90,7 @@ class SendMessage extends Component {
           onChange={this.onChange}
           value={this.state.text}
         /> */}
-         
           </form>
-        
       </div>
     )
   }

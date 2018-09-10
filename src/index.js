@@ -24,7 +24,6 @@ store.subscribe(() => {
 })
 sagaMiddleware.run(watchRequest);
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

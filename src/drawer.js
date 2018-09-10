@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
-
-
 import Messages from './containers/messages';
 import SendMessage from './components/send-message'
 import UserRooms from './containers/user-rooms';
@@ -44,14 +42,12 @@ const ClippedDrawer = (props) => {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      
       <Drawer
         variant="permanent"
         classes={{
           paper: classes.drawerPaper,
         }}
       >
-       
         <UserRooms  />
         <Divider />
         <Users />
@@ -62,9 +58,7 @@ const ClippedDrawer = (props) => {
           {/* <TypingIndicator usersTyping={props.usersTyping} />    */}
           <SendMessage onSubmit={props.onSubmit} onChange={props.onChange} />
         </div>
-        
       </main>
-
        <Drawer
         variant="permanent"
         classes={{

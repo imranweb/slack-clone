@@ -9,11 +9,9 @@ import {connectChatkit, receiveMessage, joinRoom, getJoinableRooms, setCurrentRo
 class ChatView extends Component {
   constructor(props) {
     super(props);
-    
     this.state = {
       usersTyping: []
     }
-
     this.sendMessage = this.sendMessage.bind(this);
   }
 
@@ -25,7 +23,6 @@ class ChatView extends Component {
   }
 
   sendTypingEvent() {
-  
     if(this.props.currentRoom.id) {
        this.props.currentUser
        .isTypingIn({roomId: this.props.currentRoom.id})
@@ -36,7 +33,6 @@ class ChatView extends Component {
   subscribe(props) {
     if(props.currentUser) {
       const roomId = +(props.match ? props.match.params.roomId : config.DEFAULT_ROOM_ID);
-    
       if(!props.currentRoom || (roomId !== props.currentRoom.id)) {
         props.setCurrentRoomId(roomId);
         props.joinRoom(props.currentUser, roomId);
@@ -48,10 +44,6 @@ class ChatView extends Component {
           messageLimit: 100,
           hooks: {
             onNewMessage: message => {
-              //console.log("new message", message)
-              // this.setState({
-              //   messages: [...this.state.messages, message],
-              // })
               this.props.receiveMessage(message);
             },
             onUserStartedTyping: user => {
@@ -93,13 +85,10 @@ class ChatView extends Component {
         this.props.getJoinableRooms(props.currentUser);
       }
     }
-
   } 
 
   componentDidMount () {
     const userId = this.props.currentUserId;
-
-  //  console.log("Did mount", userId);
     this.props.connectChatkit(userId);
   }
 
@@ -117,7 +106,6 @@ class ChatView extends Component {
   }
 }
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
     currentUser: state.currentUser,
@@ -130,4 +118,3 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatView);
-//export default ChatView

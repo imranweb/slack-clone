@@ -12,8 +12,7 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {createUser} from '../actions';
 
 const styles = theme => ({
@@ -46,6 +45,9 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
 });
 
 class SignInForm extends Component {
@@ -53,7 +55,8 @@ class SignInForm extends Component {
     super(props)
     this.state = {
       username: '',
-      name: ''
+      name: '',
+      loading: false,
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -61,16 +64,13 @@ class SignInForm extends Component {
   }
 
   onSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
+    this.setState({ loading: true });
     this.props.createUser({id:this.state.username, name: this.state.name});
-    // window.sessionStorage.setItem('current_user', this.state.username);
-    // window.location.href = './messages';
-    //this.props.onSubmit({username:this.state.username, name: this.state.name});
   }
 
   onChange(e) {
     this.setState({ username: e.target.value });
-    this.props.onChange();
   }
 
   onNameChange(e) {
@@ -79,6 +79,7 @@ class SignInForm extends Component {
 
   render() {
     const { classes } = this.props;
+    const loading = this.state.loading ? <CircularProgress className={classes.progress}  /> : '';
     return (
       <React.Fragment>
       <CssBaseline />
@@ -112,6 +113,10 @@ class SignInForm extends Component {
             >
               Sign in
             </Button>
+            <div align="center">
+              {loading}
+            </div>
+           
           </form>
         </Paper>
       </main>
@@ -133,7 +138,5 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators({createUser}, dispatch);
 }
-//export default Board;
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignInForm));
 
-//export default withStyles(styles)(SignInForm);createUser
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignInForm));

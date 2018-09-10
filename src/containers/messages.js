@@ -40,18 +40,41 @@ const styles = theme => ({
 });
 
 
-
 class Messages extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      noMessage: false,
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    // Check no meesages
+    if(props.messages.length === 0) {
+      setTimeout(() => {
+        if(props.messages.length === 0) {
+          this.setState({ noMessage: true });
+        }
+      }, 3000)
+    }
+    else {
+      this.setState({ noMessage: false });
+    }
+  }
 
   render() {
     const { classes } = this.props;
-    if(this.props.messages.length === 0) {
+    const noMessage = this.state.noMessage ? <div>No messages found</div>: '';
+    if(this.props.messages.length === 0 && (!this.state.noMessage)) {
       return (
         <LinearQuery classes={classes} />
       )
     }
+    
     return (
       <div className={classes.root}>
+        {noMessage}
         <List>
           {this.props.messages.map((message, index) => {
              let inLineStyles = {
@@ -86,4 +109,3 @@ const mapStateToProps = (state, ownProps) => {
 // }
 
 export default connect(mapStateToProps, null)(withStyles(styles)(Messages));
-//export default withStyles(styles)(Messages);

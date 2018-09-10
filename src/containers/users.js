@@ -44,4 +44,3 @@ const mapStateToProps = (state, ownProps) => {
 // }
 
 export default connect(mapStateToProps, null)(Users);
-//export default Users
