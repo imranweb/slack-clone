@@ -5,15 +5,24 @@ action) => {
   switch (action.type) {
     case 'SET_CURRENT_USER': {
       const data = action.payload;
-      return { ...currState, currentUser: data.currentUser, currentRoom: data.currentRoom, 
-        currentRoomId: data.currentRoom.id, rooms: data.currentUser.rooms,
+      return {
+        ...currState,
+        currentUser: data.currentUser,
+        currentRoom: data.currentRoom,
+        currentRoomId: data.currentRoom.id,
+        rooms: data.currentUser.rooms,
         users: data.currentRoom.users,
       };
     }
     case 'SET_CURRENT_ROOM_ID':
       return { ...currState, currentRoomId: action.payload };
     case 'SET_CURRENT_ROOM':
-      return { ...currState, currentRoom: action.payload, users: action.payload.users, messages: [] }
+      return {
+        ...currState,
+        currentRoom: action.payload,
+        users: action.payload.users,
+        messages: [],
+      };
     case 'SET_JOINABLE_ROOMS':
       return { ...currState, joinableRooms: action.payload };
     case 'RECEIVE_MESSAGE':

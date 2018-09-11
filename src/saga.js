@@ -2,9 +2,9 @@ import { put, call } from 'redux-saga/effects';
 import Services from '../src/services';
 
 
-const onError = (error) =>{
+const onError = (error) => {
   console.log(error);
-}
+};
 
 
 const onConnect = (userId) => {
@@ -16,17 +16,15 @@ const onConnect = (userId) => {
 
 const onJoinRoom = ({ currentUser, roomId }) => {
   return currentUser.joinRoom({ roomId })
-  .then(currentRoom => {
-    return currentRoom;
-  })
-}
+    .then(currentRoom => currentRoom);
+};
 
 const onGetJoinableRooms = (currentUser) => {
   return currentUser.getJoinableRooms()
   .then(rooms => {
     return rooms;
   })
-  .catch(err => {
+  .catch (err => {
     onError(err);
   })
 }
@@ -36,41 +34,38 @@ const onCreateUser = (payload) => {
   Services.signIn(payload);
 };
 
-
-
-export function* connect({payload}) {
+export function* connect({ payload }) {
   try {
     const currentUserAndRoom = yield call(onConnect, payload);
-    yield put({ type: 'SET_CURRENT_USER', payload:currentUserAndRoom});
-  } catch(error) {
+    yield put({ type: 'SET_CURRENT_USER', payload: currentUserAndRoom });
+  } catch (error) {
     onError(error);
   }
 }
 
 
-export function* joinRoom({payload}) {
+export function* joinRoom({ payload }) {
   try {
     const currentRoom = yield call(onJoinRoom, payload);
-    yield put({ type: 'SET_CURRENT_ROOM', payload:currentRoom});
-  } catch(error) {
+    yield put({ type: 'SET_CURRENT_ROOM', payload: currentRoom });
+  } catch (error) {
     onError(error);
   }
 }
 
-export function * getJoinableRooms({payload}) {
+export function* getJoinableRooms({ payload }) {
   try {
     const joinableRooms = yield call(onGetJoinableRooms, payload);
-    yield put({ type: 'SET_JOINABLE_ROOMS', payload:joinableRooms});
-  } catch(error) {
+    yield put({ type: 'SET_JOINABLE_ROOMS', payload: joinableRooms });
+  } catch (error) {
     onError(error);
   }
 }
 
-export function* createUser({payload}) {
+export function* createUser({ payload }) {
   try {
-     yield call(onCreateUser, payload);
-  } catch(error) {
+    yield call(onCreateUser, payload);
+  } catch (error) {
     onError(error);
   }
 }
-

@@ -49,7 +49,7 @@ class Messages extends Component {
     }
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     // Check no meesages
     if(props.messages.length === 0) {
       setTimeout(() => {

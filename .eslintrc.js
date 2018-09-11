@@ -1,7 +1,7 @@
 module.exports = {
-   "extends": "airbnb-base",
-    "globals": {
-      "document": true,
-      "window": true
-    }
+  "extends": "airbnb-base",
+  "globals": {
+    "document": true,
+    "window": true
+  }
 };

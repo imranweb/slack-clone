@@ -73,7 +73,7 @@ class ChatView extends Component {
     }
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if(props.currentUser && this.props.disconnect) {
       props.currentUser.disconnect();
     }

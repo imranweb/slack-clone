@@ -44,8 +44,9 @@ export default class AddRoom extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const name = this.state.inputValue;
+    const isPrivate = this.state.isPrivate;
     if(name !== '') {
-      this.props.onRoomCreation(name);
+      this.props.onRoomCreation({ name, isPrivate });
       this.handleClose();
     } 
     
