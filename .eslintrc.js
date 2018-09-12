@@ -3,5 +3,8 @@ module.exports = {
   "globals": {
     "document": true,
     "window": true
-  }
+  },
+  "env": {
+    "mocha": true
+  },
 };
