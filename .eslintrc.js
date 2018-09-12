@@ -5,6 +5,7 @@ module.exports = {
     "window": true
   },
   "env": {
-    "mocha": true
+    "mocha": true,
+    "chai": true,
   },
 };
