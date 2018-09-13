@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Messages from './containers/messages';
-import SendMessage from './components/send-message'
+import SendMessage from './components/send-message';
 import UserRooms from './containers/user-rooms';
 import JoinableRooms from './containers/joinable-rooms';
 import Users from './containers/users';
-//import TypingIndicator from './components/typing-indicator'
+// import TypingIndicator from './components/typing-indicator'
 
 const drawerWidth = 320;
 
@@ -33,7 +33,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
     minWidth: 0, // So the Typography noWrap works
-    paddingBottom:0,
+    paddingBottom: 0,
   },
   toolbar: theme.mixins.toolbar,
 });
@@ -48,13 +48,13 @@ const ClippedDrawer = (props) => {
           paper: classes.drawerPaper,
         }}
       >
-        <UserRooms  />
+        <UserRooms />
         <Divider />
         <Users />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.wrapper}>
-          <Messages />   
+          <Messages />
           {/* <TypingIndicator usersTyping={props.usersTyping} />    */}
           <SendMessage onSubmit={props.onSubmit} onChange={props.onChange} />
         </div>
@@ -69,7 +69,7 @@ const ClippedDrawer = (props) => {
       </Drawer>
     </div>
   );
-}
+};
 
 ClippedDrawer.propTypes = {
   classes: PropTypes.object.isRequired,

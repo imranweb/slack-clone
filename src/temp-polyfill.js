@@ -1,5 +1,3 @@
-const raf = global.requestAnimationFrame = (cb) => {
+export default global.requestAnimationFrame = (cb) => {
   setTimeout(cb, 0);
 };
-
-export default raf;

@@ -4,6 +4,6 @@ module.exports = {
     key: '20326e50-8ffd-4f71-b7f8-4d4986146e74:fl9bQJJdmjruNK3hJSl3Y8D1IFvxiKxc7iI1T3CEEJw=',
   },
   base_url: 'http://localhost:3001/',
-  //base_url: 'https://slack-chatkit.herokuapp.com/',
+  // base_url: 'https://slack-chatkit.herokuapp.com/',
   DEFAULT_ROOM_ID: 15782902,
 };

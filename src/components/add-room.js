@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,57 +13,55 @@ import Switch from '@material-ui/core/Switch';
 
 const styles = {
   button: {
-    //margin: theme.spacing.unit,
-    float:'right',
+    // margin: theme.spacing.unit,
+    float: 'right',
     marginTop: '4px',
   },
   dialog: {
     width: '400px',
-  }
-}
+  },
+};
 
 export default class AddRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      inputValue : '',
+      inputValue: '',
       isPrivate: false,
     };
-  
   }
-  
+
   handleClickOpen() {
     this.setState({ open: true });
-  };
+  }
 
-  handleClose () {
-    this.setState({ open: false, inputValue: '', isPrivate:false});
-  };
+  handleClose() {
+    this.setState({ open: false, inputValue: '', isPrivate: false });
+  }
 
   onSubmit(event) {
     event.preventDefault();
     const name = this.state.inputValue;
-    const isPrivate = this.state.isPrivate;
-    if(name !== '') {
+    const { isPrivate } = this.state;
+    if (name !== '') {
       this.props.onRoomCreation({ name, isPrivate });
       this.handleClose();
-    } 
-    
+    }
   }
 
   onChange(event) {
-    this.setState({inputValue: event.target.value});
+    this.setState({ inputValue: event.target.value });
   }
 
-  handleSwitchChange(event){
-    this.setState({isPrivate: event.target.checked});
+  handleSwitchChange(event) {
+    this.setState({ isPrivate: event.target.checked });
   }
 
   render() {
     return (
       <Fragment>
-        <Button mini  align="right" variant="fab" color="primary" aria-label="Add" style={styles.button} onClick={this.handleClickOpen.bind(this)}>
+        <Button mini align="right" variant="fab" color="primary" aria-label="Add" style={styles.button} onClick={this.handleClickOpen.bind(this)}>
             <AddIcon />
         </Button>
         <Dialog

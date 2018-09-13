@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects';
-import Services from '../src/services';
+import Services from './services';
 
 
 const onError = (error) => {
@@ -8,10 +8,10 @@ const onError = (error) => {
 
 
 const onConnect = (userId) => {
-  return Services.getCurrentUserAndCurrentRoom(userId).then(currentUserAndRoom => {
+  return Services.getCurrentUserAndCurrentRoom(userId).then((currentUserAndRoom) => {
     return currentUserAndRoom;
   });
-}
+};
 
 
 const onJoinRoom = ({ currentUser, roomId }) => {
@@ -21,13 +21,9 @@ const onJoinRoom = ({ currentUser, roomId }) => {
 
 const onGetJoinableRooms = (currentUser) => {
   return currentUser.getJoinableRooms()
-  .then(rooms => {
-    return rooms;
-  })
-  .catch (err => {
-    onError(err);
-  })
-}
+    .then(rooms => rooms)
+    .catch(err => onError(err));
+};
 
 
 const onCreateUser = (payload) => {

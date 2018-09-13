@@ -24,7 +24,6 @@ const styles = {
 function DenseAppBar(props) {
   const { classes } = props;
   const logout = (props.currentUsername) ? <Button color="inherit" onClick={props.onLogout}>Logout</Button> : '';
-  //console.log(classes);
   return (
     <div className={classes.root}>
       <AppBar position="static">

@@ -1,5 +1,11 @@
 const messageReducer = (currState = {
-  currentUser: null, currentRoomId: null, currentRoom: null, messages: [], users: [], rooms: [], joinableRooms: [],
+  currentUser: null,
+  currentRoomId: null,
+  currentRoom: null,
+  messages: [],
+  users: [],
+  rooms: [],
+  joinableRooms: [],
 },
 action) => {
   switch (action.type) {

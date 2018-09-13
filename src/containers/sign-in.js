@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {createUser} from '../actions';
+import { createUser } from '../actions';
 
 const styles = theme => ({
   layout: {
@@ -52,21 +52,21 @@ const styles = theme => ({
 
 class SignInForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: '',
       name: '',
       loading: false,
-    }
-    this.onSubmit = this.onSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
+    };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.setState({ loading: true });
-    this.props.createUser({id:this.state.username, name: this.state.name});
+    this.props.createUser({ id: this.state.username, name: this.state.name });
   }
 
   onChange(e) {
@@ -74,12 +74,12 @@ class SignInForm extends Component {
   }
 
   onNameChange(e) {
-    this.setState({ name: e.target.value })
+    this.setState({ name: e.target.value });
   }
 
   render() {
     const { classes } = this.props;
-    const loading = this.state.loading ? <CircularProgress className={classes.progress}  /> : '';
+    const loading = this.state.loading ? <CircularProgress className={classes.progress} /> : '';
     return (
       <React.Fragment>
       <CssBaseline />
@@ -116,12 +116,12 @@ class SignInForm extends Component {
             <div align="center">
               {loading}
             </div>
-           
+
           </form>
         </Paper>
       </main>
     </React.Fragment>
-    )
+    );
   }
 }
 
@@ -129,14 +129,14 @@ SignInForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   };
-}
+};
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({createUser}, dispatch);
-}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ createUser }, dispatch);
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignInForm));

@@ -9,12 +9,13 @@
     "axios": "^0.18.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "prop-types": "^15.6.2",
     "pusher-chatkit-server": "^0.12.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "0.9.5",
+    "react-scripts": "1.0.15",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0"
   },
@@ -24,18 +25,20 @@
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
-    "redux-mock-store": "^1.5.3",
-    "redux-test-utils": "^0.2.2"
+    "redux-mock-store": "^1.5.3"
   },
   "scripts": {
     "start": "concurrently \"node ./server.js\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test33": "mocha src/**/*.test.js",
+    "pretest": "npm run lint",
+    "lint": "./node_modules/.bin/eslint ./src",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

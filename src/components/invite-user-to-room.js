@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -36,56 +36,56 @@ const styles = theme => ({
 });
 
 
-
 class AddUsersToRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      selectValue : '',
+      selectValue: '',
       isPrivate: false,
       name: [],
     };
-  
   }
-  
+
   handleClickOpen() {
     this.setState({ open: true });
-  };
+  }
 
-  handleClose () {
-    this.setState({ open: false, selectValue: '', isPrivate:false});
-  };
+  handleClose() {
+    this.setState({ open: false, selectValue: '', isPrivate: false });
+  }
 
   onSubmit(event) {
     event.preventDefault();
     const roomId = this.state.selectValue;
     const userIds = this.state.name;
-    if(roomId && userIds.length > 0) {
+    if (roomId && userIds.length > 0) {
       this.props.onUsersAddedToRoom({ roomId, userIds });
       this.handleClose();
     }
   }
 
   handleSelectChange(event) {
-    this.setState({selectValue: event.target.value});
+    this.setState({ selectValue: event.target.value });
   }
 
   handleUserChange(event) {
-    this.setState({name: event.target.value});
+    this.setState({ name: event.target.value });
   }
 
-  handleSwitchChange(event){
-    this.setState({isPrivate: event.target.checked});
+  handleSwitchChange(event) {
+    this.setState({ isPrivate: event.target.checked });
   }
 
   render() {
-    const privateRooms = this.props.rooms.filter(room => room.isPrivate && room.createdByUserId === this.props.currentUser.id);
-    if(privateRooms.length === 0 ){
+    const privateRooms = this.props.rooms.filter(room => room.isPrivate
+     && (room.createdByUserId === this.props.currentUser.id));
+    if (privateRooms.length === 0) {
       return '';
     }
-    const {classes, theme} = this.props;
-    const menuItems = privateRooms.map(room => <MenuItem key={room.id} value={room.id}>{room.name}</MenuItem>);
+    const { classes, theme } = this.props;
+    const menuItems = privateRooms.map(room => <MenuItem key={room.id}
+      value={room.id}>{room.name}</MenuItem>);
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -97,22 +97,8 @@ class AddUsersToRoom extends React.Component {
         },
       },
     };
-    
-    // const names = [
-    //   'Oliver Hansen',
-    //   'Van Henry',
-    //   'April Tucker',
-    //   'Ralph Hubbard',
-    //   'Omar Alexander',
-    //   'Carlos Abbott',
-    //   'Miriam Wagner',
-    //   'Bradley Wilkerson',
-    //   'Virginia Andrews',
-    //   'Kelly Snyder',
-    // ];
 
     return (
-      
       <Fragment>
         <Button color="primary" onClick={this.handleClickOpen.bind(this)}>
           Add Users to Private rooms
@@ -127,8 +113,6 @@ class AddUsersToRoom extends React.Component {
           <form onSubmit={this.onSubmit.bind(this)}>
           <DialogTitle id="form-dialog-title">Add Users To Private Room</DialogTitle>
           <DialogContent>
-            
-
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="room">Select Room</InputLabel>
               <Select
@@ -142,9 +126,6 @@ class AddUsersToRoom extends React.Component {
                 {menuItems}
               </Select>
             </FormControl>
-
-
-              
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="select-multiple-chip">Users</InputLabel>
             <Select
@@ -192,7 +173,6 @@ class AddUsersToRoom extends React.Component {
     );
   }
 }
-
 
 AddUsersToRoom.propTypes = {
   classes: PropTypes.object.isRequired,

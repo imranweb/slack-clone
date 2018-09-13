@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux';
-//import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
 
 
 const LinearQuery = (props) => {
@@ -19,7 +18,7 @@ const LinearQuery = (props) => {
       <LinearProgress color="secondary" variant="query" />
     </div>
   );
-}
+};
 
 
 const styles = theme => ({
@@ -36,52 +35,57 @@ const styles = theme => ({
     margin: 10,
     color: '#fff',
     backgroundColor: 'red',
-  }
+  },
 });
 
 
 class Messages extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       noMessage: false,
-    }
+    };
   }
 
-  UNSAFE_componentWillReceiveProps(props) {
-    // Check no meesages
-    if(props.messages.length === 0) {
-      setTimeout(() => {
-        if(props.messages.length === 0) {
-          this.setState({ noMessage: true });
-        }
-      }, 3000)
-    }
-    else {
-      this.setState({ noMessage: false });
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      messgaes: nextProps.messages,
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      if (this.props.messages.length === 0) {
+        setTimeout(() => {
+          if (this.props.messages.length === 0) {
+            this.setState({ noMessage: true });
+          }
+        }, 3000);
+      } else {
+        this.setState({ noMessage: false });
+      }
     }
   }
 
   render() {
     const { classes } = this.props;
-    const noMessage = this.state.noMessage ? <div>No messages found</div>: '';
-    if(this.props.messages.length === 0 && (!this.state.noMessage)) {
+    const noMessage = this.state.noMessage ? <div>No messages found</div> : '';
+    if (this.props.messages.length === 0 && (!this.state.noMessage)) {
       return (
         <LinearQuery classes={classes} />
-      )
+      );
     }
-    
+
     return (
       <div className={classes.root}>
         {noMessage}
         <List>
           {this.props.messages.map((message, index) => {
-             let inLineStyles = {
+            const inLineStyles = {
               avatar: {
-                backgroundColor: message.sender.customData.avatar_color
-              }
-            }
+                backgroundColor: message.sender.customData.avatar_color,
+              },
+            };
             return (
               <ListItem key={index} dense button className={classes.listItem}>
                 <Avatar className={classes.avatar} style={inLineStyles.avatar}>
@@ -89,20 +93,19 @@ class Messages extends Component {
                 </Avatar>
                 <ListItemText primary={message.sender.name} secondary={message.text} />
               </ListItem>
-            )
-          }
-        )}
+            );
+          })}
         </List>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     messages: state.messages,
   };
-}
+};
 
 // const mapDispatchToProps = (dispatch, ownProps) => {
 //   return bindActionCreators({connectChatkit}, dispatch);

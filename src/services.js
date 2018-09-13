@@ -33,7 +33,7 @@ const getCurrentUserAndCurrentRoom = (userId) => {
   return chatManager(userId)
     .connect()
     .then((currentUser) => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         currentUser.joinRoom({ roomId: config.DEFAULT_ROOM_ID })
           .then(currentRoom => resolve({ currentUser, currentRoom }));
       });
@@ -46,10 +46,10 @@ const getCurrentUserAndCurrentRoom = (userId) => {
 const signIn = (payload) => {
   return axios
     .post(`${config.base_url}create/user`, payload)
-    .then(response => onSuccess(payload.id))
-    .catch(error => {
+    .then(onSuccess(payload.id))
+    .catch((error) => {
       if (error.response.data.error === 'services/chatkit/user_already_exists') {
-          onSuccess(payload.id);
+        onSuccess(payload.id);
       } else {
         onError(error);
       }
