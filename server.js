@@ -64,7 +64,7 @@ app.post('/authenticate', (req, res) => {
 
 
 const PORT = 3001;
-app.listen(process.env.PORT || PORT, err => {
+app.listen(PORT, err => {
   if (err) {
     console.error(err);
   } else {
