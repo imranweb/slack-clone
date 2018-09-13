@@ -31,6 +31,7 @@ module.exports = {
         "varsIgnorePattern": "should|expect|raf"
       }
     ],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     // 'id-match': [
     //   'error',
     //   '^(UNSAFE_componentDidMount|UNSAFE_componentWillReceiveProps|UNSAFE_componentWillUpdate|[a-z]+([A-Z][a-z]+)*)$'
