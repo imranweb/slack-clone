@@ -2,7 +2,8 @@ module.exports = {
   'settings': {
     'react': {
       "version": "^16.2.0",
-    }
+    },
+    "import/core-modules": [ "body-parser" ]
   },
   "extends": [
     "airbnb-base",
