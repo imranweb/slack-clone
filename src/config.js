@@ -5,5 +5,5 @@ module.exports = {
   },
   base_url: 'http://localhost:3001/',
   // base_url: 'https://slack-chatkit.herokuapp.com/',
-  DEFAULT_ROOM_ID: 15782902,
+  DEFAULT_ROOM_ID: 16131299,
 };

@@ -64,10 +64,10 @@ class ChatView extends Component {
             onUserCameOnline: (user) => {
               if (user.id !== props.currentUser.id) {
                 this.props.userCameOnLine(user);
-                this.forceUpdate();
+                // this.forceUpdate();
               }
             },
-            onUserWentOffline: () => this.forceUpdate(),
+            // onUserWentOffline: (user) => this.this.props.userCameOnLine(user);,
             onUserJoined: () => this.forceUpdate(),
           },
         });

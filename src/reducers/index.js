@@ -36,8 +36,10 @@ action) => {
     case 'CREATE_ROOM':
       return { ...currState, rooms: [...currState.rooms, action.payload] };
     case 'USER_CAME_ONLINE':
-      return { ...currState, users: [...currState.users, action.payload] };
-
+    {
+      const newUsers = currState.users.filter(user => user.id !== action.payload.id);
+      return { ...currState, users: [...newUsers, action.payload] };
+    }
     default:
       return currState;
   }

@@ -48,8 +48,13 @@ class Messages extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
+    if (nextProps.messages.length > 0) {
+      return {
+        messages: nextProps.messages,
+      };
+    }
     return {
-      messgaes: nextProps.messages,
+      loading: false,
     };
   }
 
@@ -104,6 +109,7 @@ class Messages extends Component {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages,
+    loading: true,
   };
 };
 
