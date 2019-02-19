@@ -45,7 +45,7 @@ describe('Reducers', () => {
       payload: {
         roomId: ROOM_ID,
         senderId: 'Admin',
-        text: 'Hello',
+        text: 'Hello world',
         sender: {
           customData: { avatar_color: 'blue' },
           id: 'Admin',
